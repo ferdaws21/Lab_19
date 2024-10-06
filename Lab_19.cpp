@@ -18,16 +18,16 @@ private:
     Review* head;
 
 public:
-    // Constructor
+    
     Movie(const std::string& movieTitle) : title(movieTitle), head(nullptr) {}
 
-    // Function to add a review at the head of the linked list
+    
     void addReview(double rating, const std::string& comment) {
         Review* newReview = new Review{rating, comment, head};
         head = newReview;
     }
 
-    // Function to output movie details and reviews
+   
     void outputReviews() const {
         std::cout << "Movie: " << title << std::endl;
         Review* current = head;
@@ -41,7 +41,7 @@ public:
         }
     }
 
-    // Destructor to free memory
+    
     ~Movie() {
         Review* current = head;
         while (current != nullptr) {
@@ -52,18 +52,18 @@ public:
     }
 };
 
-// Function to generate a random rating between 1.0 and 5.0
+
 double generateRandomRating() {
     return 1.0 + static_cast<double>(rand()) / (static_cast<double>(RAND_MAX / (5.0 - 1.0)));
 }
 
-// Function to read reviews from an external file and create Movie objects
+
 std::vector<Movie> createMoviesFromFile(const std::string& filename) {
     std::ifstream file(filename);
     std::string comment;
     std::vector<Movie> movies;
 
-    // Create 4 movie objects
+    
     movies.emplace_back("Movie 1");
     movies.emplace_back("Movie 2");
     movies.emplace_back("Movie 3");
@@ -74,7 +74,7 @@ std::vector<Movie> createMoviesFromFile(const std::string& filename) {
         while (std::getline(file, comment) && movieIndex < 4) {
             double rating = generateRandomRating();
             movies[movieIndex].addReview(rating, comment);
-            movieIndex = (movieIndex + 1) % 4; // Cycle through the 4 movies
+            movieIndex = (movieIndex + 1) % 4; 
         }
         file.close();
     } else {
@@ -85,11 +85,11 @@ std::vector<Movie> createMoviesFromFile(const std::string& filename) {
 }
 
 int main() {
-    srand(static_cast<unsigned int>(time(0))); // Seed the random number generator
-
+    srand(static_cast<unsigned int>(time(0))); 
+    
     std::vector<Movie> movies = createMoviesFromFile("reviews.txt");
 
-    // Output all movies and their reviews
+   
     for (const auto& movie : movies) {
         movie.outputReviews();
         std::cout << std::endl;
